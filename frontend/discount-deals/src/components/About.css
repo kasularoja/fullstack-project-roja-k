@@ -1,0 +1,88 @@
+.about-container {
+  background-color: rgba(255, 255, 255, 0.08); /* transparent */
+  backdrop-filter: blur(6px);
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 3rem auto;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.about-container h1,
+.about-container h2 {
+  color: #ffcc99;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Form layout */
+.about-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.about-form input,
+.about-form textarea {
+  width: 100%;
+  max-width: 450px;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1.5px solid #eaa15c;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-form input::placeholder,
+.about-form textarea::placeholder {
+  color: #ddd;
+}
+
+.about-form input:focus,
+.about-form textarea:focus {
+  outline: none;
+  border-color: #e16309;
+  box-shadow: 0 0 6px #e16309;
+}
+
+/* Buttons */
+.about-form button,
+.back-button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.4rem;
+  background-color: #e16309;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.about-form button:hover,
+.back-button:hover {
+  background-color: #cc5805;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .about-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .about-form input,
+  .about-form textarea {
+    max-width: 100%;
+  }
+
+  .about-form button,
+  .back-button {
+    width: 100%;
+  }
+}

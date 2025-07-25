@@ -1,0 +1,49 @@
+.deal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: rgba(255, 255, 255, 0.08); /* semi-transparent background */
+  backdrop-filter: blur(6px); /* match with other containers */
+  border-radius: 8px;
+  overflow: hidden;
+  color: white; /* default font color for contrast */
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+}
+
+.deal-table th,
+.deal-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.deal-table th {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffcc99;
+  font-weight: bold;
+}
+
+.deal-table td {
+  color: #ffffff;
+}
+
+.deal-table td button {
+  padding: 0.4rem 0.8rem;
+  background-color: #e16309;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.deal-table td button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.deal-table td button:hover:not(:disabled) {
+  background-color: #cc5805;
+  transform: scale(1.05);
+}

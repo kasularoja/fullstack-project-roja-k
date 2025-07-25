@@ -1,0 +1,45 @@
+.home-container {
+  max-width: 700px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.08); /* semi-transparent for overlay effect */
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  backdrop-filter: blur(6px);
+}
+
+.home-container h1 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  color: #ffffff;
+}
+
+.home-container p {
+  margin-bottom: 1.5rem;
+  font-size: 1.15rem;
+  color: #ffcc99;
+}
+
+.home-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #e16309;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background-color: #cc5805;
+  transform: scale(1.05);
+}

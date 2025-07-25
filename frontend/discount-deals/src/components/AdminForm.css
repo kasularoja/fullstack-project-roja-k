@@ -1,0 +1,144 @@
+.admin-form-container {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem 3rem;
+  background-color: rgba(255, 255, 255, 0.08); /* transparent background */
+  backdrop-filter: blur(6px); /* blur behind */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-form-container h2,
+.admin-form-container h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #ffcc99;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1.5px solid #eaa15c;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
+  color: #ddd;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+  border-color: #e16309;
+  outline: none;
+  box-shadow: 0 0 6px #e16309;
+}
+
+.admin-form label {
+  width: 100%;
+  max-width: 400px;
+  font-weight: 600;
+  color: #ffcc99;
+  margin-top: 0.5rem;
+}
+
+.admin-form button {
+  width: 200px;
+  padding: 0.7rem;
+  background-color: #e16309;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+  margin-top: 1rem;
+}
+
+.admin-form button:hover {
+  background-color: #cc5805;
+  transform: scale(1.05);
+}
+
+/* Deal list below form */
+.deal-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.deal-list-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.12);
+}
+
+.deal-list-item strong {
+  color: #ffcc99;
+}
+
+.delete-btn {
+  background-color: #cc5805;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #a94b03;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .admin-form-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .admin-form input,
+  .admin-form textarea,
+  .admin-form select {
+    max-width: 100%;
+  }
+
+  .admin-form button {
+    width: 100%;
+  }
+
+  .deal-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .delete-btn {
+    margin-top: 0.8rem;
+    width: 100%;
+  }
+}

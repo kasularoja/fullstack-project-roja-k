@@ -1,0 +1,80 @@
+.login-container {
+  max-width: 400px;
+  margin: 4rem auto;
+  padding: 2rem 2.5rem;
+  background-color: rgba(255, 255, 255, 0.08); /* translucent bg */
+  backdrop-filter: blur(6px); /* glassmorphism effect */
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container h2 {
+  color: #ffcc99;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.login-container label {
+  font-weight: 600;
+  color: #ffcc99;
+}
+
+.login-container input,
+.login-container select {
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1.5px solid #eaa15c;
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container input::placeholder,
+.login-container select::placeholder {
+  color: #ddd;
+}
+
+.login-container input:focus,
+.login-container select:focus {
+  border-color: #e16309;
+  outline: none;
+  box-shadow: 0 0 6px #e16309;
+}
+
+.login-container button {
+  padding: 0.6rem;
+  background-color: #e16309;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.login-container button:hover {
+  background-color: #cc5805;
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .login-container input,
+  .login-container select,
+  .login-container button {
+    width: 100%;
+  }
+}
