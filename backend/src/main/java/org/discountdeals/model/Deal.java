@@ -10,13 +10,12 @@ import java.util.List;
 public class Deal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
   private String title;
 
  private String description;
 
- private String imageUrl;
 
     private double price;
 
@@ -25,40 +24,41 @@ public class Deal {
     private String category;
     @OneToMany(mappedBy = "deal")
     @JsonBackReference
+
+
     private List<Favorite> favorites;
 
     // Getters and Setters
-    public String getId() {
+    public Long getId() {
+
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
+
         this.id = id;
     }
 
     public String getTitle() {
+
         return title;
     }
 
     public void setTitle(String title) {
+
         this.title = title;
     }
 
     public String getDescription() {
+
         return description;
     }
 
     public void setDescription(String description) {
+
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     public double getPrice() {
         return price;

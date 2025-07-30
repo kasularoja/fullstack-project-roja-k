@@ -1,48 +1,51 @@
 package org.discountdeals.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "favorites")
+@Table(name = "favorites")
 public class Favorite {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private String userId;
-
-    private String dealId;
-
-    private String dealTitle;
-
-    private String dealImageUrl;
-
-    private double dealPrice;
-
-    private double dealDiscountPrice;
-
-    private String dealCategory;
-
-    private String dealDescription;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
-    @JsonBackReference
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "deal_id", referencedColumnName = "id")
     private Deal deal;
 
+    public Long getId() {
 
-
-    public Favorite() {
-        // Default constructor
+        return id;
     }
 
-    public String getUserId() {
-        return userId;
+    public void setId(Long id) {
+
+        this.id = id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public User getUser() {
+
+        return user;
     }
+
+    public void setUser(User user) {
+
+        this.user = user;
+    }
+
+    public Deal getDeal() {
+
+        return deal;
+    }
+
+    public void setDeal(Deal deal) {
+
+        this.deal = deal;
+    }
+
 }
