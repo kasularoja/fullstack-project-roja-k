@@ -27,7 +27,6 @@ public class FavoriteController {
     @Autowired
     private DealRepository dealRepository;
 
-    // ✅ CREATE — POST a favorite
     @PostMapping
     public ResponseEntity<Favorite> createFavorite(@RequestParam Long userId, @RequestParam Long dealId) {
         Optional<User> userOpt = userRepository.findById(userId);
@@ -37,20 +36,17 @@ public class FavoriteController {
             Favorite favorite = new Favorite();
             favorite.setUser(userOpt.get());
             favorite.setDeal(dealOpt.get());
-            favoriteRepository.save(favorite);
-            return ResponseEntity.ok(favorite);
+            return ResponseEntity.ok(favoriteRepository.save(favorite));
         } else {
             return ResponseEntity.badRequest().build();
         }
     }
 
-    // ✅ READ — GET all favorites for a user
     @GetMapping("/user/{userId}")
     public List<Favorite> getFavoritesByUser(@PathVariable Long userId) {
         return favoriteRepository.findByUserId(userId);
     }
 
-    // ✅ UPDATE — PUT (optional: update favorite to point to a different deal)
     @PutMapping("/{id}")
     public ResponseEntity<Favorite> updateFavorite(@PathVariable Long id, @RequestParam Long newDealId) {
         Optional<Favorite> favOpt = favoriteRepository.findById(id);
@@ -59,14 +55,12 @@ public class FavoriteController {
         if (favOpt.isPresent() && dealOpt.isPresent()) {
             Favorite favorite = favOpt.get();
             favorite.setDeal(dealOpt.get());
-            favoriteRepository.save(favorite);
-            return ResponseEntity.ok(favorite);
+            return ResponseEntity.ok(favoriteRepository.save(favorite));
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    // ✅ DELETE — DELETE favorite
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFavorite(@PathVariable Long id) {
         if (favoriteRepository.existsById(id)) {

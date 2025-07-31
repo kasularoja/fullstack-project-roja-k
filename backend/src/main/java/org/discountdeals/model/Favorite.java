@@ -18,34 +18,15 @@ public class Favorite {
     @JoinColumn(name = "deal_id", referencedColumnName = "id")
     private Deal deal;
 
-    public Long getId() {
+    public Long getId() { return id; }
 
-        return id;
-    }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
+    public User getUser() { return user; }
 
-        this.id = id;
-    }
+    public void setUser(User user) { this.user = user; }
 
-    public User getUser() {
+    public Deal getDeal() { return deal; }
 
-        return user;
-    }
-
-    public void setUser(User user) {
-
-        this.user = user;
-    }
-
-    public Deal getDeal() {
-
-        return deal;
-    }
-
-    public void setDeal(Deal deal) {
-
-        this.deal = deal;
-    }
-
+    public void setDeal(Deal deal) { this.deal = deal; }
 }
