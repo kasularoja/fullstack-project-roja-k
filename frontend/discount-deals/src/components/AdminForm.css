@@ -1,144 +1,294 @@
-.admin-form-container {
-  max-width: 700px;
-  margin: 3rem auto;
-  padding: 2rem 3rem;
-  background-color: rgba(255, 255, 255, 0.08); /* transparent background */
-  backdrop-filter: blur(6px); /* blur behind */
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
-  color: white;
+:root {
+  --accent: #e16309;
+  --accent-light: #eaa15c;
+  --shadow: 0 0 12px rgba(255, 255, 255, 0.17);
+  --frost-bg: rgba(255, 255, 255, 0.07);
+  --frost-border: rgba(234, 161, 92, 0.29);
+  --expired-bg: rgba(255, 255, 255, 0.03);
+}
+
+body {
+  background: linear-gradient(135deg, #231d26 0%, #322114 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: white;
 }
 
-.admin-form-container h2,
-.admin-form-container h3 {
-  text-align: center;
-  margin-bottom: 1.5rem;
+.admin-container {
+  background: var(--frost-bg);
+  backdrop-filter: blur(6px);
+  padding: 2.2rem 2.2rem 2.8rem 2.2rem;
+  border-radius: 15px;
+  max-width: 900px;
+  margin: 3rem auto;
+  box-shadow: var(--shadow);
+  color: white;
+  font-family: inherit;
+  min-height: 80vh;
+}
+
+.admin-container h2 {
   color: #ffcc99;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
 }
 
-.admin-form {
+.deal-form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.1rem;
   align-items: center;
+  background: transparent;
 }
 
-.admin-form input,
-.admin-form textarea,
-.admin-form select {
+.form-row {
+  display: flex;
+  gap: 1rem;
   width: 100%;
-  max-width: 400px;
-  padding: 0.6rem 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.deal-form input,
+.deal-form select,
+.deal-form textarea {
+  width: 100%;
+  max-width: 440px;
+  padding: 0.55rem 0.95rem;
   font-size: 1rem;
-  border: 1.5px solid #eaa15c;
+  border: 1.5px solid var(--accent-light);
   border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
   box-sizing: border-box;
 }
 
-.admin-form input::placeholder,
-.admin-form textarea::placeholder {
+.deal-form input::placeholder,
+.deal-form textarea::placeholder {
   color: #ddd;
 }
 
-.admin-form input:focus,
-.admin-form textarea:focus,
-.admin-form select:focus {
-  border-color: #e16309;
+.deal-form input:focus,
+.deal-form textarea:focus,
+.deal-form select:focus {
   outline: none;
-  box-shadow: 0 0 6px #e16309;
+  border-color: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
 }
 
-.admin-form label {
-  width: 100%;
-  max-width: 400px;
-  font-weight: 600;
-  color: #ffcc99;
-  margin-top: 0.5rem;
-}
-
-.admin-form button {
-  width: 200px;
-  padding: 0.7rem;
-  background-color: #e16309;
-  color: white;
+.deal-form-button {
+  background: var(--accent);
+  color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
+  padding: 0.58rem 1.35rem;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s;
-  margin-top: 1rem;
+  transition: background 0.23s, transform 0.18s;
+  box-shadow: 0 2px 12px rgba(225, 99, 9, 0.09);
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: center;
 }
 
-.admin-form button:hover {
-  background-color: #cc5805;
+.deal-form-button:hover {
+  background: #cc5805;
+  transform: scale(1.045);
+}
+
+.deal-list-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.control-btn {
+  background: rgba(225, 99, 9, 0.17);
+  color: #ffcc99;
+  font-weight: 500;
+  border: 1.2px solid var(--accent-light);
+  border-radius: 6px;
+  padding: 0.58rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.17s, color 0.17s;
+  white-space: nowrap;
+}
+
+.control-btn:hover {
+  background: var(--accent);
+  color: #fff;
   transform: scale(1.05);
 }
 
-/* Deal list below form */
 .deal-list {
-  list-style: none;
-  padding: 0;
-  margin-top: 2rem;
-}
-
-.deal-list-item {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 1rem 1.5rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  color: white;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.12);
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: flex-start;
+  margin-top: 0.2rem;
 }
 
-.deal-list-item strong {
+.deal-card {
+  flex: 1 0 275px;
+  max-width: 320px;
+  background: var(--frost-bg);
+  backdrop-filter: blur(2.5px);
+  border: 1px solid var(--frost-border);
+  box-shadow: 0 3px 15px rgba(255, 255, 255, 0.15);
+  border-radius: 11px;
+  padding: 1.15rem 1rem 1.5rem 1rem;
+  color: #fff;
+  position: relative;
+  transition: box-shadow 0.17s, background 0.17s, color 0.16s, border 0.15s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.deal-card.expired {
+  background: var(--expired-bg);
+  color: #ffd4b3;
+  opacity: 0.65;
+  border-color: #ffe7ce70;
+  filter: grayscale(0.25);
+}
+
+.deal-title {
+  font-size: 1.15rem;
+  font-weight: bold;
   color: #ffcc99;
+  margin-bottom: 0.4em;
+}
+
+.deal-card.expired .deal-title {
+  color: #ffe7ce;
+}
+
+.deal-description {
+  font-size: 1.01rem;
+  color: #fff7ed;
+  margin-bottom: 0.8em;
+}
+
+.deal-meta {
+  font-size: 0.98rem;
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12em;
+}
+
+.meta-cat {
+  background: rgba(225, 99, 9, 0.17);
+  color: #ffcc99;
+  padding: 2px 11px;
+  border-radius: 5px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  font-size: 0.93em;
+  display: inline-block;
+}
+
+.deal-countdown {
+  font-size: 0.97em;
+  color: #ffab79;
+  font-weight: 600;
+}
+
+.deal-card.expired .deal-countdown {
+  color: #ffcba4;
 }
 
 .delete-btn {
-  background-color: #cc5805;
-  color: white;
+  position: absolute;
+  right: 15px;
+  bottom: 14px;
+  font-size: 0.96em;
+  padding: 0.35rem 1.05rem;
+  background: #cc5805;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
   border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(255, 204, 153, 0.04);
   cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+  transition: background 0.18s, transform 0.15s;
+  white-space: nowrap;
 }
 
 .delete-btn:hover {
-  background-color: #a94b03;
+  background: #9e3f04;
+  transform: scale(1.05);
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .admin-form-container {
-    padding: 1.5rem 1rem;
+.empty-message {
+  width: 100%;
+  text-align: center;
+  color: #ffcc99b0;
+  font-size: 1.2rem;
+  padding: 2rem 0 2.5rem 0;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 900px) {
+  .admin-container {
+    padding: 1.3rem 0.55rem 2rem 0.55rem;
+    margin: 1rem;
   }
 
-  .admin-form input,
-  .admin-form textarea,
-  .admin-form select {
-    max-width: 100%;
+  .deal-list {
+    justify-content: center;
   }
+}
 
-  .admin-form button {
-    width: 100%;
-  }
-
-  .deal-list-item {
+@media (max-width: 570px) {
+  .deal-list {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
-  .delete-btn {
-    margin-top: 0.8rem;
+  .deal-card {
+    max-width: 96vw;
+    min-width: 92vw;
+  }
+
+  .form-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .deal-form-button {
     width: 100%;
   }
+
+  .control-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .deal-list-controls {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
+
+/* Inputs, selects, textarea background and focus outline */
+input,
+select,
+textarea {
+  background: rgba(255, 255, 255, 0.13);
+  color: #fff;
+  border-radius: 6px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  box-shadow: 0 0 6px var(--accent);
 }

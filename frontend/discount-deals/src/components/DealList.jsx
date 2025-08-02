@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './DealList.css';
+import DealRow from './DealRow'; 
+
 
 export default function DealList() {
   const [deals, setDeals] = useState([]);

@@ -1,0 +1,14 @@
+.expired-deal-row {
+  opacity: 0.6;
+  background-color: #f9e6e6;
+}
+
+.expired-text {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.favorite-btn.added {
+  background-color: #28a745;
+  color: white;
+}
