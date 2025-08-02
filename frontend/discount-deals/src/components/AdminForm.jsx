@@ -108,6 +108,9 @@ export default function AdminForm() {
           <div className="form-row">
             <select value={category} onChange={(e) => setCategory(e.target.value)}>
               <option>Electronics</option>
+              <option>Food</option>
+              <option>Books</option>
+              <option>Kids</option>
               <option>Fashion</option>
               <option>Groceries</option>
               <option>Travel</option>
