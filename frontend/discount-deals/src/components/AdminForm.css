@@ -26,29 +26,27 @@ body {
   color: white;
   font-family: inherit;
   min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .admin-container h2 {
   color: #ffcc99;
-  text-align: center;
   margin-bottom: 2rem;
   font-weight: 700;
+  width: 100%;
+  text-align: center;
 }
 
 .deal-form {
   display: flex;
   flex-direction: column;
+  align-items: center; /* centers inputs */
   gap: 1.1rem;
-  align-items: center;
   background: transparent;
-}
-
-.form-row {
-  display: flex;
-  gap: 1rem;
   width: 100%;
-  justify-content: center;
-  flex-wrap: wrap;
+  max-width: 600px;
 }
 
 .deal-form input,
@@ -64,6 +62,7 @@ body {
   color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s;
   box-sizing: border-box;
+  resize: vertical;
 }
 
 .deal-form input::placeholder,
@@ -77,6 +76,14 @@ body {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 6px var(--accent);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .deal-form-button {
@@ -102,10 +109,12 @@ body {
 .deal-list-controls {
   display: flex;
   gap: 1rem;
-  justify-content: flex-end;
+  justify-content: center; /* center buttons horizontally */
   margin-top: 1.5rem;
   margin-bottom: 1rem;
   flex-wrap: wrap;
+  width: 100%;
+  max-width: 600px;
 }
 
 .control-btn {
@@ -130,8 +139,10 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  justify-content: flex-start;
+  justify-content: center; /* center deal cards */
   margin-top: 0.2rem;
+  width: 100%;
+  max-width: 940px;
 }
 
 .deal-card {
@@ -261,10 +272,12 @@ body {
   .form-row {
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
 
   .deal-form-button {
     width: 100%;
+    max-width: 440px;
   }
 
   .control-btn {
@@ -275,6 +288,8 @@ body {
   .deal-list-controls {
     flex-direction: column;
     gap: 0.8rem;
+    width: 100%;
+    max-width: 600px;
   }
 }
 
