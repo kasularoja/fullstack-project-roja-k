@@ -13,7 +13,7 @@ body {
   margin: 0;
   padding: 0;
   color: white;
-   min-height: 100vh;
+  min-height: 100vh;
 }
 
 .admin-container {
@@ -38,7 +38,8 @@ body {
   font-weight: 700;
   width: 100%;
   text-align: center;
-}
+  }
+
 
 /* Form */
 .deal-form {
@@ -67,8 +68,8 @@ body {
   resize: vertical;
 }
 
-.deal-form input::placeholder,
-.deal-form textarea::placeholder {
+.deal-form input:placeholder,
+.deal-form textarea:placeholder {
   color: #ddd;
 }
 
@@ -346,10 +347,5 @@ textarea:focus {
   font-weight: 600;
   margin-top: 0.15rem;
 }
-.meta-discount::before {
-  content: "Discount: ";
-  font-weight: 500;
-}
-.meta-discount::after {
-  content: "%";
-}
+
+

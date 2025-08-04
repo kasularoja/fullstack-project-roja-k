@@ -21,7 +21,7 @@ export default function AdminForm() {
     if (r !== 'admin') navigate('/login');
   }, [navigate]);
 
-  // Fetch all deals
+  // Fetch all deals from backend
   const fetchDeals = () => {
     fetch('http://localhost:8080/api/deals')
       .then((res) => res.json())
@@ -32,6 +32,8 @@ export default function AdminForm() {
   useEffect(() => {
     fetchDeals();
   }, []);
+
+    // Handle form submission to add a new deal
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,6 +61,8 @@ export default function AdminForm() {
       category,
       expiryDate,
     };
+
+    // Send POST request to backend to add the deal
     fetch('http://localhost:8080/api/deals', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
