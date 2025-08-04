@@ -18,9 +18,6 @@ public class Deal {
     private double price;
     private double discountPrice;
     private String category;
-
-
-
     private LocalDate expiryDate;
 
     @OneToMany(mappedBy = "deal", cascade = CascadeType.ALL, orphanRemoval = true)
