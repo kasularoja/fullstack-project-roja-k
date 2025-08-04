@@ -5,6 +5,7 @@ import './About.css';
 export default function About() {
   const navigate = useNavigate();
 
+// Navigate back to homepage
   const handleBack = () => {
     navigate('/');
   };
