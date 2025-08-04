@@ -6,27 +6,49 @@ import jakarta.persistence.*;
 @Table(name = "favorites")
 public class Favorite {
 
+    // Primary key for the Favorite table
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Many favorites can belong to one user
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    // Many favorites can belong to one deal
     @ManyToOne
     @JoinColumn(name = "deal_id", referencedColumnName = "id")
     private Deal deal;
+    public Favorite() {}
 
-    public Long getId() { return id; }
+    public Favorite(User user, Deal deal) {
+        this.user = user;
+        this.deal = deal;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
 
-    public User getUser() { return user; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public void setUser(User user) { this.user = user; }
+    public User getUser() {
+        return user;
+    }
 
-    public Deal getDeal() { return deal; }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-    public void setDeal(Deal deal) { this.deal = deal; }
+    public Deal getDeal() {
+        return deal;
+    }
+
+    public void setDeal(Deal deal) {
+        this.deal = deal;
+    }
 }
