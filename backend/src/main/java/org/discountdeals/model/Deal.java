@@ -12,7 +12,6 @@ public class Deal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
     private String description;
     private double price;
@@ -27,8 +26,6 @@ public class Deal {
     @Version
     private Integer version;
 
-    public Deal() {}
-
     public Deal(String title, String description, double price, double discountPrice, String category, Integer version, LocalDate expiryDate) {
         this.title = title;
         this.description = description;
@@ -39,33 +36,62 @@ public class Deal {
         this.expiryDate = expiryDate;
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
 
-    public String getTitle() { return title; }
+        this.id = id;
+    }
 
-    public void setTitle(String title) { this.title = title; }
+    public String getTitle() {
+        return title;
+    }
 
-    public String getDescription() { return description; }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public void setDescription(String description) { this.description = description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public double getPrice() { return price; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public void setPrice(double price) { this.price = price; }
+    public double getPrice() {
+        return price;
+    }
 
-    public double getDiscountPrice() { return discountPrice; }
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-    public void setDiscountPrice(double discountPrice) { this.discountPrice = discountPrice; }
+    public double getDiscountPrice() {
+        return discountPrice;
+    }
 
-    public String getCategory() { return category; }
+    public void setDiscountPrice(double discountPrice) {
+        this.discountPrice = discountPrice;
+    }
 
-    public void setCategory(String category) { this.category = category; }
+    public String getCategory() {
+        return category;
+    }
 
-    public List<Favorite> getFavorites() { return favorites; }
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
-    public void setFavorites(List<Favorite> favorites) { this.favorites = favorites; }
+    public List<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<Favorite> favorites) {
+        this.favorites = favorites;
+    }
 
     public Integer getVersion() {
         return version;
