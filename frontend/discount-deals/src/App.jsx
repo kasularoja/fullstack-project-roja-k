@@ -69,7 +69,7 @@ function App() {
             }
           />
           <Route path="/dealList" element={<DealList />} /> 
-          <Route path="/adminform" element={<AdminForm />} />
+          <Route path="/adminForm" element={<AdminForm />} />
         </Routes>
       </main>
       <Footer />
