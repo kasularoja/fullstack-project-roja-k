@@ -1,6 +1,5 @@
 package org.discountdeals.controllers;
 
-import jakarta.persistence.OptimisticLockException;
 import org.discountdeals.model.Deal;
 import org.discountdeals.repository.DealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/deals")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "*")
 public class DealController {
 
     @Autowired
@@ -27,42 +26,32 @@ public class DealController {
         return ResponseEntity.ok(deals);
     }
 
-    // Get deal by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Deal> getDealById(@PathVariable Long id) {
-        Optional<Deal> deal = dealRepository.findById(id);
-        return deal.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
     // Create new deal
     @PostMapping
     public ResponseEntity<Deal> createDeal(@RequestBody Deal deal) {
-        // Ensure version is null so JPA initializes it
         deal.setVersion(null);
         Deal savedDeal = dealRepository.save(deal);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedDeal);
     }
 
-    // Update existing deal (handles optimistic locking)
+    // Update existing deal (optimistic locking)
     @PutMapping("/{id}")
     public ResponseEntity<?> updateDeal(@PathVariable Long id, @RequestBody Deal updatedDeal) {
         try {
             return dealRepository.findById(id)
                     .map(existing -> {
-                        // Copy updatable fields
                         existing.setTitle(updatedDeal.getTitle());
                         existing.setDescription(updatedDeal.getDescription());
                         existing.setPrice(updatedDeal.getPrice());
                         existing.setDiscountPrice(updatedDeal.getDiscountPrice());
                         existing.setCategory(updatedDeal.getCategory());
-                        existing.setVersion(updatedDeal.getVersion()); // needed for optimistic locking
                         existing.setExpiryDate(updatedDeal.getExpiryDate());
+                        existing.setVersion(updatedDeal.getVersion());
                         Deal saved = dealRepository.save(existing);
                         return ResponseEntity.ok(saved);
                     })
                     .orElse(ResponseEntity.notFound().build());
-        } catch (OptimisticLockingFailureException | OptimisticLockException e) {
+        } catch (OptimisticLockingFailureException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body("Deal was updated by another transaction. Please reload and try again.");
         }
