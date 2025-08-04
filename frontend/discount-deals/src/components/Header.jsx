@@ -25,11 +25,11 @@ function Header() {
           <Link to="/favorites">Favorites</Link>
         )}
 
-        {role === 'admin' && <Link to="/adminform">Post Deals</Link>}
+        {role === 'admin' && <Link to="/adminForm">Post Deals</Link>}
 
         <Link to="/about">About</Link>
 
-        {/* org.discountdeals.model.User info or login */}
+        {/* org.discountDeals.model.User info or login */}
         {username ? (
           <div className="user-info">
             <span>Welcome, <strong>{username}</strong></span>

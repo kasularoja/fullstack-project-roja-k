@@ -6,7 +6,7 @@
   flex-direction: column;
   min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f9f9f9;
+  background-color:  #f97316;;
 }
 
 /* Background watermark layer */
@@ -26,7 +26,7 @@
 /* Header styling */
 .header {
   background-color: #1e293b; /* Navy blue */
-  color: #fff;
+  color:  #f97316;;
   padding: 1rem 2rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 }
@@ -54,7 +54,7 @@
 }
 
 .nav a {
-  color: #ffffff;
+  color: #f97316;;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s, border-bottom 0.3s;
@@ -86,7 +86,7 @@
 /* Footer */
 .footer {
   background-color: #1e293b;
-  color: #fff;
+  color:  #f97316;;
   text-align: center;
   padding: 1rem;
   margin-top: auto;

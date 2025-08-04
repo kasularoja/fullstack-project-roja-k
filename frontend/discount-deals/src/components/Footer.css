@@ -2,7 +2,7 @@
   background-color: transparent !important;
   backdrop-filter: blur(5px) !important;
   -webkit-backdrop-filter: blur(5px) !important;
-  color: white !important;
+  color:  #f97316 !important;
   position: relative !important;
   z-index: 1 !important;
 }

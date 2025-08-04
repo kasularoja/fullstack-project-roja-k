@@ -13,6 +13,7 @@ body {
   margin: 0;
   padding: 0;
   color: white;
+   min-height: 100vh;
 }
 
 .admin-container {
@@ -250,7 +251,7 @@ button {
 .empty-message {
   width: 100%;
   text-align: center;
-  color: #ffcc99b0;
+  color: black;
   font-size: 1.2rem;
   padding: 2rem 0 2.5rem 0;
 }
@@ -345,4 +346,10 @@ textarea:focus {
   font-weight: 600;
   margin-top: 0.15rem;
 }
-
+.meta-discount::before {
+  content: "Discount: ";
+  font-weight: 500;
+}
+.meta-discount::after {
+  content: "%";
+}

@@ -47,7 +47,7 @@ export default function Login() {
         localStorage.setItem('username', user.username);
         localStorage.setItem('userId', user.id);
         if (role === 'admin') {
-          navigate('/adminform');
+          navigate('/adminForm');
         } else {
           navigate('/favorites');
         }

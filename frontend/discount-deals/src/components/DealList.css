@@ -6,7 +6,7 @@
   backdrop-filter: blur(6px); /* match with other containers */
   border-radius: 8px;
   overflow: hidden;
-  color: white; /* default font color for contrast */
+  color: #cc5805;; /* default font color for contrast */
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
 }
 
@@ -24,14 +24,14 @@
 }
 
 .deal-table td {
-  color: #ffffff;
+  color: #cc5805;;
 }
 
 .deal-table td button {
   padding: 0.4rem 0.8rem;
   background-color: #e16309;
   border: none;
-  color: white;
+  color: #cc5805;;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
@@ -39,7 +39,7 @@
 }
 
 .deal-table td button:disabled {
-  background-color: #ccc;
+  background-color: #cc5805;;
   cursor: not-allowed;
 }
 
