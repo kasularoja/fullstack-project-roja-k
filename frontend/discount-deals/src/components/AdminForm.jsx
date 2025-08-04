@@ -7,138 +7,162 @@ export default function AdminForm() {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('Electronics');
   const [expiryDate, setExpiryDate] = useState('');
+  const [discountPercent, setDiscountPercent] = useState('');
+  const [price, setPrice] = useState('');
   const [deals, setDeals] = useState([]);
   const [showExpired, setShowExpired] = useState(true);
   const [sortAsc, setSortAsc] = useState(true);
   const [role, setRole] = useState(null);
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    const currentRole = localStorage.getItem('role');
-    setRole(currentRole);
-    if (!currentRole) {
-      navigate('/login');
-    }
+    const r = localStorage.getItem('role');
+    setRole(r);
+    if (r !== 'admin') navigate('/login');
   }, [navigate]);
 
-  useEffect(() => {
-    const savedDeals = JSON.parse(localStorage.getItem('deals')) || [];
-    setDeals(savedDeals);
-  }, []);
-
-  const saveDeals = (updated) => {
-    setDeals(updated);
-    localStorage.setItem('deals', JSON.stringify(updated));
+  // Fetch all deals
+  const fetchDeals = () => {
+    fetch('http://localhost:8080/api/deals')
+      .then((res) => res.json())
+      .then(setDeals)
+      .catch(() => setDeals([]));
   };
+
+  useEffect(() => {
+    fetchDeals();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !description || !expiryDate) {
-      alert('All fields including expiry date are required.');
+    if (!title || !description || !expiryDate || discountPercent === '' || price === '') {
+      alert('All fields are required.');
       return;
     }
-    const newDeal = {
-      id: Date.now(),
+    const priceVal = parseFloat(price);
+    const discountPercentVal = parseFloat(discountPercent);
+    if (isNaN(priceVal) || priceVal < 0) {
+      alert('Please enter a valid positive price.');
+      return;
+    }
+    if (isNaN(discountPercentVal) || discountPercentVal < 0 || discountPercentVal > 100) {
+      alert('Enter discount % between 0 and 100.');
+      return;
+    }
+    // Backend model requires price and discountPrice
+    const discountPrice = parseFloat((priceVal * (1 - discountPercentVal / 100)).toFixed(2));
+    const deal = {
       title,
       description,
+      price: priceVal,
+      discountPrice,
       category,
       expiryDate,
     };
-    const updated = [...deals, newDeal];
-    saveDeals(updated);
-    setTitle('');
-    setDescription('');
-    setCategory('Electronics');
-    setExpiryDate('');
+    fetch('http://localhost:8080/api/deals', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(deal),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to add deal');
+        return res.json();
+      })
+      .then(() => {
+        fetchDeals();
+        setTitle('');
+        setDescription('');
+        setCategory('Electronics');
+        setExpiryDate('');
+        setPrice('');
+        setDiscountPercent('');
+      })
+      .catch((err) => alert(err));
   };
 
   const handleDelete = (id) => {
-    const updated = deals.filter((deal) => deal.id !== id);
-    saveDeals(updated);
+    if (!window.confirm('Delete this deal?')) return;
+    fetch(`http://localhost:8080/api/deals/${id}`, { method: 'DELETE' })
+      .then((res) => {
+        if (!res.ok && res.status !== 204) throw new Error('Delete failed');
+        setDeals((ds) => ds.filter((d) => d.id !== id));
+      })
+      .catch((err) => alert('Failed to delete: ' + err));
   };
 
   const isExpired = (date) => new Date(date) < new Date();
-
-  const getCountdown = (date) => {
-    const now = new Date();
-    const expiry = new Date(date);
-    const diff = expiry - now;
-    if (diff <= 0) return 'Expired';
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    return `${days}d ${hours}h ${minutes}m`;
-  };
-
-  // Sort and filter deals
   let filteredDeals = [...deals];
-
-  filteredDeals.sort((a, b) => {
-    if (sortAsc) return new Date(a.expiryDate) - new Date(b.expiryDate);
-    else return new Date(b.expiryDate) - new Date(a.expiryDate);
-  });
-
-  if (role !== 'admin') {
-    filteredDeals = filteredDeals.filter((deal) => !isExpired(deal.expiryDate));
-  } else if (!showExpired) {
-    filteredDeals = filteredDeals.filter((deal) => !isExpired(deal.expiryDate));
-  }
+  filteredDeals.sort((a, b) =>
+    sortAsc
+      ? new Date(a.expiryDate) - new Date(b.expiryDate)
+      : new Date(b.expiryDate) - new Date(a.expiryDate)
+  );
+  if (!showExpired) filteredDeals = filteredDeals.filter((d) => !isExpired(d.expiryDate));
 
   return (
     <div className="admin-container">
       <h2>Admin Deal Manager</h2>
-
-      {role === 'admin' && (
-        <form className="deal-form" onSubmit={handleSubmit}>
+      <form className="deal-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Deal Title"
+          required
+        />
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+          required
+          rows={3}
+        />
+        <div className="form-row">
+          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option>Electronics</option>
+            <option>Fashion</option>
+            <option>Groceries</option>
+            <option>Travel</option>
+          </select>
           <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Deal Title"
+            type="date"
+            value={expiryDate}
+            onChange={(e) => setExpiryDate(e.target.value)}
             required
           />
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Description"
+          <input
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder="Price"
+            min="0"
+            step="0.01"
             required
-            rows={3}
           />
-          <div className="form-row">
-            <select value={category} onChange={(e) => setCategory(e.target.value)}>
-              <option>Electronics</option>
-              <option>Food</option>
-              <option>Books</option>
-              <option>Kids</option>
-              <option>Fashion</option>
-              <option>Groceries</option>
-              <option>Travel</option>
-            </select>
-            <input
-              type="date"
-              value={expiryDate}
-              onChange={(e) => setExpiryDate(e.target.value)}
-              required
-            />
-            <button type="submit" className="deal-form-button">
-              Add Deal
-            </button>
-          </div>
-        </form>
-      )}
-
+          <input
+            type="number"
+            value={discountPercent}
+            onChange={(e) => setDiscountPercent(e.target.value)}
+            placeholder="Discount %"
+            min="0"
+            max="100"
+            step="0.1"
+            required
+            className="discount-input"
+          />
+          <button type="submit" className="deal-form-button">
+            Add Deal
+          </button>
+        </div>
+      </form>
       <div className="deal-list-controls">
         <button onClick={() => setSortAsc((prev) => !prev)} className="control-btn">
           {sortAsc ? 'Sort: Soonest First' : 'Sort: Latest First'}
         </button>
-        {role === 'admin' && (
-          <button onClick={() => setShowExpired((x) => !x)} className="control-btn">
-            {showExpired ? 'Hide Expired Deals' : 'Show Expired Deals'}
-          </button>
-        )}
+        <button onClick={() => setShowExpired((x) => !x)} className="control-btn">
+          {showExpired ? 'Hide Expired Deals' : 'Show Expired Deals'}
+        </button>
       </div>
-
       <div className="deal-list">
         {filteredDeals.length === 0 ? (
           <div className="empty-message">No deals to show.</div>
@@ -146,7 +170,7 @@ export default function AdminForm() {
           filteredDeals.map((deal) => (
             <div
               key={deal.id}
-              className={`deal-card${role === 'admin' && isExpired(deal.expiryDate) ? ' expired' : ''}`}
+              className={`deal-card${isExpired(deal.expiryDate) ? ' expired' : ''}`}
             >
               <div className="deal-main">
                 <div className="deal-info">
@@ -158,16 +182,23 @@ export default function AdminForm() {
                   <span>
                     <b>Expires:</b> {deal.expiryDate}
                   </span>
-                  <span className={`deal-countdown${isExpired(deal.expiryDate) ? ' expired-text' : ''}`}>
-                    {isExpired(deal.expiryDate) ? 'Expired' : <>Time left: <b>{getCountdown(deal.expiryDate)}</b></>}
+                  <span
+                    className={`deal-countdown${isExpired(deal.expiryDate) ? ' expired-text' : ''}`}
+                  >
+                    {isExpired(deal.expiryDate)
+                      ? 'Expired'
+                      : `Time left: ${Math.ceil(
+                          (new Date(deal.expiryDate) - new Date()) / (1000 * 60 * 60 * 24)
+                        )}d`}
+                  </span>
+                  <span className="meta-discount">
+                    <b>Discount:</b> {deal.price > 0 ? `${(((deal.price - deal.discountPrice) / deal.price) * 100).toFixed(1)}%` : '-'}
                   </span>
                 </div>
               </div>
-              {role === 'admin' && (
-                <button className="delete-btn" onClick={() => handleDelete(deal.id)}>
-                  Delete
-                </button>
-              )}
+              <button className="delete-btn" onClick={() => handleDelete(deal.id)}>
+                Delete
+              </button>
             </div>
           ))
         )}

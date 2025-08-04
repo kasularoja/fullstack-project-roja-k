@@ -2,54 +2,64 @@ import React, { useState, useEffect } from 'react';
 import './Favorites.css';
 
 export default function Favorites() {
-  const [favorites, setFavorites] = useState(() => {
-    const saved = localStorage.getItem('favorites');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const userId = localStorage.getItem('userId');
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites)); // Save updated favorites back to localStorage
-  }, [favorites]);
+    if (userId) {
+      fetch(`http://localhost:8080/api/favorites/user/${userId}`)
+        .then((res) => res.json())
+        .then((data) => setFavorites(data))
+        .catch(() => setFavorites([]));
+    }
+  }, [userId]);
 
-  // Function to remove a deal from favorites
-  const removeFavorite = (id) => {
-    setFavorites(favorites.filter(deal => deal.id !== id)); // Keep only deals that don't match the given ID
+  const removeFavorite = (favoriteId) => {
+    fetch(`http://localhost:8080/api/favorites/${favoriteId}`, {
+      method: 'DELETE',
+    })
+      .then(() => setFavorites((favs) => favs.filter((f) => f.id !== favoriteId)))
+      .catch((err) => alert('Failed to remove favorite: ' + err));
   };
 
-  // If no favorites are saved, show a message
- if (favorites.length === 0) {
-    return (
-      <div className="favorites-container">
-        <h1>Your org.discountdeals.model.Favorite Deals</h1>
-        <p>You have no favorite deals saved yet.</p>
-      </div>
-    );
-  }
-
-  // If there are favorites, show them in a table
   return (
     <div className="favorites-container">
-      <h1>Your org.discountdeals.model.Favorite Deals</h1>
-      <table className="favorites-table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-          {favorites.map(deal => (
-            <tr key={deal.id}>
-              <td>{deal.title}</td>
-              <td>{deal.description}</td>
-              <td>
-                <button onClick={() => removeFavorite(deal.id)}>Remove</button>
-              </td>
+      <h2>Your Favorite Deals</h2>
+      {favorites.length === 0 ? (
+        <p className="empty-message">You have no favorite deals saved yet.</p>
+      ) : (
+        <table className="favorites-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Discount %</th>
+              <th className="action-column">Remove</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {favorites.map((fav) => (
+              <tr key={fav.id} className="favorite-row">
+                <td>{fav.deal.title}</td>
+                <td>{fav.deal.description}</td>
+                <td>
+                  {fav.deal.price
+                    ? `${(((fav.deal.price - fav.deal.discountPrice) / fav.deal.price) * 100).toFixed(1)}%`
+                    : '-'}
+                </td>
+                <td>
+                  <button
+                    className="favorite-remove-btn"
+                    onClick={() => removeFavorite(fav.id)}
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }

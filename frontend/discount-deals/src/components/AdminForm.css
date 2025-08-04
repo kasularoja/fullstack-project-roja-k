@@ -39,6 +39,7 @@ body {
   text-align: center;
 }
 
+/* Form */
 .deal-form {
   display: flex;
   flex-direction: column;
@@ -86,26 +87,35 @@ body {
   flex-wrap: wrap;
 }
 
-.deal-form-button {
-  background: var(--accent);
-  color: #fff;
+/* Buttons */
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
   border: none;
-  border-radius: 6px;
-  padding: 0.58rem 1.35rem;
-  font-weight: bold;
   cursor: pointer;
-  transition: background 0.23s, transform 0.18s;
-  box-shadow: 0 2px 12px rgba(225, 99, 9, 0.09);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 6px;
+  padding: 0.55rem 1.2rem;
   white-space: nowrap;
+}
+
+/* Add deal button */
+.deal-form-button {
+  background-color: var(--accent);
+  color: white;
+  box-shadow: 0 2px 12px rgba(225, 99, 9, 0.09);
+  font-weight: bold;
   flex-shrink: 0;
   align-self: center;
 }
 
 .deal-form-button:hover {
-  background: #cc5805;
+  background-color: #cc5805;
   transform: scale(1.045);
 }
 
+/* Control buttons */
 .deal-list-controls {
   display: flex;
   gap: 1rem;
@@ -118,23 +128,21 @@ body {
 }
 
 .control-btn {
-  background: rgba(225, 99, 9, 0.17);
+  background-color: rgba(225, 99, 9, 0.17);
   color: #ffcc99;
   font-weight: 500;
   border: 1.2px solid var(--accent-light);
   border-radius: 6px;
   padding: 0.58rem 1.2rem;
-  cursor: pointer;
-  transition: background 0.17s, color 0.17s;
-  white-space: nowrap;
 }
 
 .control-btn:hover {
-  background: var(--accent);
+  background-color: var(--accent);
   color: #fff;
   transform: scale(1.05);
 }
 
+/* Deal list */
 .deal-list {
   display: flex;
   flex-wrap: wrap;
@@ -216,28 +224,29 @@ body {
   color: #ffcba4;
 }
 
+/* Delete button */
 .delete-btn {
   position: absolute;
   right: 15px;
   bottom: 14px;
   font-size: 0.96em;
   padding: 0.35rem 1.05rem;
-  background: #cc5805;
+  background-color: #cc5805;
   color: #fff;
   font-weight: bold;
   border-radius: 5px;
-  border: none;
   box-shadow: 0 2px 8px rgba(255, 204, 153, 0.04);
   cursor: pointer;
-  transition: background 0.18s, transform 0.15s;
+  transition: background-color 0.18s, transform 0.15s;
   white-space: nowrap;
 }
 
 .delete-btn:hover {
-  background: #9e3f04;
+  background-color: #9e3f04;
   transform: scale(1.05);
 }
 
+/* Empty message */
 .empty-message {
   width: 100%;
   text-align: center;
@@ -246,7 +255,7 @@ body {
   padding: 2rem 0 2.5rem 0;
 }
 
-/* Responsive for smaller screens */
+/* Responsive */
 @media (max-width: 900px) {
   .admin-container {
     padding: 1.3rem 0.55rem 2rem 0.55rem;
@@ -275,13 +284,10 @@ body {
     width: 100%;
   }
 
-  .deal-form-button {
-    width: 100%;
-    max-width: 440px;
-  }
-
+  .deal-form-button,
   .control-btn {
     width: 100%;
+    max-width: 440px;
     text-align: center;
   }
 
@@ -307,3 +313,36 @@ select:focus,
 textarea:focus {
   box-shadow: 0 0 6px var(--accent);
 }
+
+.discount-input {
+  width: 100px;
+  max-width: 100px;
+  padding: 0.55rem 0.95rem;
+  font-size: 1rem;
+  border: 1.5px solid var(--accent-light);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.discount-input::placeholder {
+  color: #ddd;
+}
+
+.discount-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+/* Add spacing for discount text in deal card meta */
+
+.meta-discount {
+  font-size: 0.97rem;
+  color: #ffcc99;
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+

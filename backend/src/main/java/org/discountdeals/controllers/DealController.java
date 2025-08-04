@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/deals")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class DealController {
 
     @Autowired
@@ -57,7 +57,7 @@ public class DealController {
                         existing.setDiscountPrice(updatedDeal.getDiscountPrice());
                         existing.setCategory(updatedDeal.getCategory());
                         existing.setVersion(updatedDeal.getVersion()); // needed for optimistic locking
-
+                        existing.setExpiryDate(updatedDeal.getExpiryDate());
                         Deal saved = dealRepository.save(existing);
                         return ResponseEntity.ok(saved);
                     })

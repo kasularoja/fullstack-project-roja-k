@@ -6,31 +6,58 @@ export default function Login() {
   const [role, setRole] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-// Handles login form submission
-  const handleLogin = (e) => {
+  // This function runs when the user submits the login form
+  const handleLogin = async (e) => {
     e.preventDefault();
-
     if (!role || (role !== 'guest' && (!username || !password))) {
       alert('Please fill in all fields');
       return;
     }
 
-    if (role === 'admin' && username === 'admin' && password === 'admin123') {
-  localStorage.setItem('role', 'admin');
-  localStorage.setItem('username', 'admin'); // Save username
-  navigate('/adminform'); // Redirect to admin form
-} else if (role === 'user' && username === 'user' && password === 'user123') {
-  localStorage.setItem('role', 'user');
-  localStorage.setItem('username', 'user');
-  navigate('/favorites'); // Redirect to favorites page
-} else if (role === 'guest') {
-  localStorage.setItem('role', 'guest');
-  localStorage.setItem('username', 'guest');
-  navigate('/'); // Redirect guest to home
-}
+    if (role === 'guest') {
+      // For guest, just log in without real user record
+      localStorage.setItem('role', 'guest');
+      localStorage.setItem('username', 'guest');
+      localStorage.setItem('userId', ''); // No real user
+      navigate('/');
+      return;
+    }
+    setLoading(true);
 
+    try {
+      // Get all users from the backend
+      const res = await fetch('http://localhost:8080/api/users');
+      if (!res.ok) throw new Error('Failed to load users');
+      const users = await res.json();
+
+      // Find a user with matching username, password, and role
+      const user = users.find(
+        (u) =>
+          u.role === role &&
+          u.username === username &&
+          u.password === password
+      );
+
+      if (user) {
+        // Save session to localStorage
+        localStorage.setItem('role', user.role);
+        localStorage.setItem('username', user.username);
+        localStorage.setItem('userId', user.id);
+        if (role === 'admin') {
+          navigate('/adminform');
+        } else {
+          navigate('/favorites');
+        }
+      } else {
+        alert('Invalid credentials or role');
+      }
+    } catch (err) {
+      alert('Error while logging in: ' + err.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -39,14 +66,17 @@ export default function Login() {
       <form onSubmit={handleLogin}>
         <label>
           Role:
-          <select value={role} onChange={(e) => setRole(e.target.value)} required>
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            required
+          >
             <option value="">Select role</option>
             <option value="admin">Admin</option>
-            <option value="user">org.discountdeals.model.User</option>
+            <option value="user">User</option>
             <option value="guest">Guest</option>
           </select>
         </label>
-
         {role !== 'guest' && (
           <>
             <label>
@@ -59,7 +89,6 @@ export default function Login() {
                 required
               />
             </label>
-
             <label>
               Password:
               <input
@@ -72,8 +101,9 @@ export default function Login() {
             </label>
           </>
         )}
-
-        <button type="submit">Login</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
       </form>
     </div>
   );

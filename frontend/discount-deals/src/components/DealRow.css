@@ -1,6 +1,6 @@
 .expired-deal-row {
   opacity: 0.6;
-  background-color: #f9e6e6;
+  background-color: rgba(255, 0, 0, 0.1);
 }
 
 .expired-text {
@@ -8,7 +8,35 @@
   font-weight: bold;
 }
 
-.favorite-btn.added {
-  background-color: #28a745;
+.favorite-btn {
+  background-color: #e16309;
   color: white;
+  border: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.favorite-btn:hover:not(:disabled) {
+  background-color: #cc5805;
+  transform: scale(1.05);
+}
+
+.favorite-btn:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+}
+
+.favorite-btn.added {
+  background-color: #4caf50;
+  pointer-events: none;
+  cursor: default;
+}
+
+table.deal-table td:nth-child(4),
+table.deal-table th:nth-child(4) {
+  text-align: center;
+  width: 90px;
 }

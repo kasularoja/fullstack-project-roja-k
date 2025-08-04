@@ -19,13 +19,13 @@ function Header() {
 
       <nav className="nav">
         <Link to="/home">Home</Link>
-        <Link to="/dealList">Deals</Link>
+        <Link to="/dealList">Available Deals</Link>
 
-        {(role === 'user' || role === 'admin') && (
+        {(role === 'user') && (
           <Link to="/favorites">Favorites</Link>
         )}
 
-        {role === 'admin' && <Link to="/adminform">Admin Panel</Link>}
+        {role === 'admin' && <Link to="/adminform">Post Deals</Link>}
 
         <Link to="/about">About</Link>
 
