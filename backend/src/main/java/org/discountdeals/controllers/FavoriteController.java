@@ -27,7 +27,7 @@ public class FavoriteController {
     @Autowired
     private DealRepository dealRepository;
 
-    // Create favorite (add deal to user favorites)
+    // Create favorite (add deals to user favorites)
     @PostMapping
     public ResponseEntity<Favorite> createFavorite(@RequestParam Long userId, @RequestParam Long dealId) {
         Optional<User> userOpt = userRepository.findById(userId);
