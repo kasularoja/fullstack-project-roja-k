@@ -14,7 +14,7 @@ import background from './assets/bg.jpg';
 import './App.css';
 
 function App() {
-  // Add state for role
+  // State to hold user role from localStorage
   const [role, setRole] = useState(localStorage.getItem('role'));
 
   // Sync role state with localStorage changes
