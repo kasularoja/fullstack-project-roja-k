@@ -1,6 +1,30 @@
-# 💸Discount Deals - Full Stack Web Application
+# Discount Deals - Full Stack Web Application
 
 A full-stack web application that allows users to browse, search, and save the best discount deals across categories. Admins can manage deals, and users can mark favorites — all built with a modern tech stack.
+
+# Features
+
+ User Roles
+- Guest: Can view all public deals.
+- User: Can save favorite deals and manage their own favorites.
+- Admin: Can post, update, and delete any deal.
+
+Deal Management
+- Admins can Create, Read, Update, and Delete (CRUD) deals.
+- Deals have title, description, price, discount price, category, and expiry date.
+
+Favorites
+- Users can mark deals as favorites.
+- Favorites are listed in a personalized "Favorites" view.
+- Users can remove favorites as needed.
+
+# Search & Filtering
+- Search deals by keywords.
+- Filter deals by categories (e.g., Electronics, Fashion, Grocery, etc.).
+
+### Expiry Management
+- Expired deals are automatically hidden from regular users.
+- Admins can still manage expired deals.
 
 ##  Tech Stack
 
@@ -8,40 +32,12 @@ A full-stack web application that allows users to browse, search, and save the b
 - React 18
 - Vite
 - React Router DOM
-- Tailwind CSS (or CSS Modules if used)
-- Axios
 
 ### Backend (Spring Boot)
 - Spring Boot 
-- Hibernate
-- PostgreSQL / H2 (for dev/testing)
-- JPA Auditing (for timestamps)
-- Spring Security (optional: if roles are protected)
-
-##  Features
-
-### Role-based Access
-- **Guest**: Can browse all public deals.
-- **User**: Can browse, search, and save favorite deals.
-- **Admin**: Can create, update, and delete deals.
-
-###  Deals Management
-- Admins can post and delete deals.
-- Each deal has:
-    - Title
-    - Description
-    - Category
-    - Expiry Date
-    - Optional Image
-- Expired deals are automatically hidden from user view.
-
-### Deal Filtering & Search
-- Search by keyword in title or description.
-- Filter by category and expiry.
-
-###  Favorites
-- Users can save and manage favorite deals.
-- Favorite deals persist using localStorage (or backend if implemented).
+- Spring Data JPA
+- MySQL
+-Rest APIs
 
 ## 📁 Project Structure
 
@@ -76,7 +72,7 @@ cd backend
 
 **Application runs at**: `http://localhost:8080`
 
-### ⚛️ Frontend Setup
+#Frontend Setup
 
 ```bash
 cd frontend
@@ -110,16 +106,16 @@ Make sure the API base URL is configured correctly in Axios (usually `http://loc
 
 
 
-##  Resources
+# Resources
 
 - [Spring Boot Docs](https://spring.io/projects/spring-boot)
 - [React Docs](https://reactjs.org/)
 - [PostgreSQL](https://www.postgresql.org/)
 
-##  Author
+# Author
 
-**Roja Kasula**  
+Roja Kasula
 Project for Full Stack Development – Section 2504 FT SWD  
-GitHub: [Your GitHub URL]  
-Deployed Link: [Deployment URL if hosted]
+GitHub: [https://github.com/kasularoja/fullstack-project-roja-k.git]  
+
 
