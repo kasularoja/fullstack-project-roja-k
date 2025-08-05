@@ -126,9 +126,9 @@ link to ERD: https://www.figma.com/board/EXmRu3p5ZxjtNXq7E7kUgt/ERD-DTA-DB-SQL--
 - Backend testing with Postman 
 # Resources
 
-- [Spring Boot Docs]
-- [React Docs]
-- [Vite Docs]
+- Spring Boot Docs
+- React Docs
+- Vite Docs
 
 
 # Author
