@@ -1,6 +1,7 @@
 import React from 'react';
 import './DealRow.css';
 
+// Component to render a single row of deal information
 export default function DealRow({ deal, role, isFavorite, addToFavorites, countdown, expired, discountPercent }) {
   const handleAddFavorite = () => {
     if (!isFavorite(deal.id)) {
