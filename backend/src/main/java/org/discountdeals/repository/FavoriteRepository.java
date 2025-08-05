@@ -6,8 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+
+@Repository // This annotation indicates that this interface is a Spring Data repository
+
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
+    // Custom query method to find favorites by user ID
 
     List<Favorite> findByUserId(Long userId);
 }
