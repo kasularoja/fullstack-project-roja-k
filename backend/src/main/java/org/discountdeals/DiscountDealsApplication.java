@@ -10,3 +10,4 @@ public class DiscountDealsApplication {
         SpringApplication.run(DiscountDealsApplication.class, args);
     }
 }
+// This is the main entry point for the DiscountDeals application.
