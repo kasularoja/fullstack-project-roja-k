@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
 
+// Home component to welcome users and provide app overview
 export default function Home() {
   return (
     <div className="home-container">
