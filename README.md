@@ -5,7 +5,7 @@ Discount Deals is a full-stack web application that allows users to browse, post
 
  User Roles
 - Guest: Can view all public deals.
-- Users: Can save favorite deals and manage their own favorites.
+- User: Can save favorite deals and manage their own favorites.
 - Admin: Can post, update, and delete any deal.
 
 Deal Management
@@ -25,7 +25,7 @@ Favorites
 - Expired deals are automatically hidden from regular users.
 - Admins can still manage expired deals.
 
-##  Tech Stack
+##  Technologies Used
 
 ### Frontend (React + Vite)
 - React 18
@@ -42,8 +42,7 @@ Favorites
 Node.js
 - Java 21
 - Maven or Gradle
-- MySQL (or use H2 for testing)
-- Git
+- MySQL
 
 
 # Project Setup
@@ -69,6 +68,7 @@ cd frontend
 npm install
 npm run dev
 ```
+
 
 Frontend runs at: `http://localhost:5173`
 

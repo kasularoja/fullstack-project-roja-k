@@ -28,6 +28,7 @@ public class Deal {
     @Version
     private Integer version;
 
+    public Deal() {}
     public Deal(String title, String description, double price, double discountPrice, String category, Integer version, LocalDate expiryDate) {
         this.title = title;
         this.description = description;

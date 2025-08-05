@@ -13,6 +13,7 @@ export default function AdminForm() {
   const [showExpired, setShowExpired] = useState(true);
   const [sortAsc, setSortAsc] = useState(true);
   const [role, setRole] = useState(null);
+  const [editId, setEditId] = useState(null); // <-- NEW for editing
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,8 +34,7 @@ export default function AdminForm() {
     fetchDeals();
   }, []);
 
-    // Handle form submission to add a new deal
-
+  // Handle form submission to add or update a deal
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title || !description || !expiryDate || discountPercent === '' || price === '') {
@@ -51,9 +51,8 @@ export default function AdminForm() {
       alert('Enter discount % between 0 and 100.');
       return;
     }
-    // Backend model requires price and discountPrice
     const discountPrice = parseFloat((priceVal * (1 - discountPercentVal / 100)).toFixed(2));
-    // Validate expiry date
+
     const deal = {
       title,
       description,
@@ -63,27 +62,77 @@ export default function AdminForm() {
       expiryDate,
     };
 
-    // Send POST request to backend to add the deal
-    fetch('http://localhost:8080/api/deals', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(deal),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to add deal');
-        return res.json();
+    if (editId) {
+      // PUT for update
+      fetch(`http://localhost:8080/api/deals/${editId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(deal),
       })
-      .then(() => {
-          // Refresh deals after adding
-        fetchDeals();
-        setTitle('');
-        setDescription('');
-        setCategory('Electronics');
-        setExpiryDate('');
-        setPrice('');
-        setDiscountPercent('');
+        .then((res) => {
+          if (!res.ok) throw new Error('Failed to update deal');
+          return res.json();
+        })
+        .then(() => {
+          fetchDeals();
+          setEditId(null); // clear edit mode
+          setTitle('');
+          setDescription('');
+          setCategory('Electronics');
+          setExpiryDate('');
+          setPrice('');
+          setDiscountPercent('');
+        })
+        .catch((err) => alert(err));
+    } else {
+      // POST for add
+      fetch('http://localhost:8080/api/deals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(deal),
       })
-      .catch((err) => alert(err));
+        .then((res) => {
+          if (!res.ok) throw new Error('Failed to add deal');
+          return res.json();
+        })
+        .then(() => {
+          fetchDeals();
+          setTitle('');
+          setDescription('');
+          setCategory('Electronics');
+          setExpiryDate('');
+          setPrice('');
+          setDiscountPercent('');
+        })
+        .catch((err) => alert(err));
+    }
+  };
+
+  // When clicking "Edit", populate fields and mark as editing
+  const handleEdit = (deal) => {
+    setEditId(deal.id);
+    setTitle(deal.title);
+    setDescription(deal.description);
+    setCategory(deal.category);
+    setExpiryDate(deal.expiryDate.slice(0, 10)); // form expects yyyy-mm-dd
+    setPrice(deal.price.toString());
+    // discountPercent = calculated from price and discountPrice
+    setDiscountPercent(
+      deal.price > 0
+        ? (((deal.price - deal.discountPrice) / deal.price) * 100).toFixed(1)
+        : ''
+    );
+  };
+
+  // Cancel editing
+  const handleCancelEdit = () => {
+    setEditId(null);
+    setTitle('');
+    setDescription('');
+    setCategory('Electronics');
+    setExpiryDate('');
+    setPrice('');
+    setDiscountPercent('');
   };
 
   const handleDelete = (id) => {
@@ -96,7 +145,7 @@ export default function AdminForm() {
       .catch((err) => alert('Failed to delete: ' + err));
   };
 
-    // Check if a deal is expired
+  // Check if a deal is expired
   const isExpired = (date) => new Date(date) < new Date();
   let filteredDeals = [...deals];
   filteredDeals.sort((a, b) =>
@@ -105,8 +154,9 @@ export default function AdminForm() {
       : new Date(b.expiryDate) - new Date(a.expiryDate)
   );
   if (!showExpired) {
-  filteredDeals = filteredDeals.filter((d) => !isExpired(d.expiryDate));
-}
+    filteredDeals = filteredDeals.filter((d) => !isExpired(d.expiryDate));
+  }
+
   return (
     <div className="admin-container">
       <h2>Admin Deal Manager</h2>
@@ -159,8 +209,17 @@ export default function AdminForm() {
             className="discount-input"
           />
           <button type="submit" className="deal-form-button">
-            Add Deal
+            {editId ? 'Update Deal' : 'Add Deal'}
           </button>
+          {editId && (
+            <button
+              type="button"
+              onClick={handleCancelEdit}
+              className="deal-form-button cancel-edit-btn"
+            >
+              Cancel
+            </button>
+          )}
         </div>
       </form>
       <div className="deal-list-controls">
@@ -204,9 +263,14 @@ export default function AdminForm() {
                   </span>
                 </div>
               </div>
-              <button className="delete-btn" onClick={() => handleDelete(deal.id)}>
-                Delete
-              </button>
+              <div>
+                <button className="edit-btn" onClick={() => handleEdit(deal)}>
+                  Edit
+                </button>
+                <button className="delete-btn" onClick={() => handleDelete(deal.id)}>
+                  Delete
+                </button>
+              </div>
             </div>
           ))
         )}
