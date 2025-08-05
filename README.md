@@ -1,7 +1,6 @@
 # Discount Deals - Full Stack Web Application
 
-A full-stack web application that allows users to browse, search, and save the best discount deals across categories. Admins can manage deals, and users can mark favorites — all built with a modern tech stack.
-
+Discount Deals is a full-stack web application that allows users to browse, post, and save promotional deals across various categories. The app features a role-based system (Admin, User, Guest) that enables tailored experiences—Admins can create and manage deals, while Users and Guests can search and view current promotions. Expired deals are automatically hidden from regular users, ensuring a clean and relevant browsing experience. The application aims to help users find the best deals efficiently while providing admins with tools to highlight featured promotions.
 # Features
 
  User Roles
@@ -38,6 +37,9 @@ Favorites
 - Spring Data JPA
 - MySQL
 -Rest APIs
+
+#INSTALLATION
+
 
 ## Project Structure
 
@@ -97,7 +99,11 @@ Make sure the API base URL is configured correctly in Axios (usually `http://loc
 | `/api/users/{id}/favorites`          | POST   | Add to favorites              |
 | `/api/users/{id}/favorites/{dealId}` | DELETE | Remove from favorites |
 
+# Wireframes
+link to wireframes: https://balsamiq.cloud/sn90nut/p4pvhg9/rA844
 
+#ERD link
+link to ERD: https://www.figma.com/board/EXmRu3p5ZxjtNXq7E7kUgt/ERD-DTA-DB-SQL--Community-?node-id=0-1&p=f&t=UzDXzsOvIx1YBywU-0
 
 # Authentication (Optional Enhancement)
 - Role stored in localStorage or managed via Spring Security
@@ -116,9 +122,9 @@ Make sure the API base URL is configured correctly in Axios (usually `http://loc
 - Backend testing with Postman 
 # Resources
 
-- [Spring Boot Docs](https://spring.io/projects/spring-boot)
-- [React Docs](https://reactjs.org/)
-- [Vite Docs](https://vitejs.dev/)
+- [Spring Boot Docs]
+- [React Docs]
+- [Vite Docs]
 
 
 # Author
