@@ -17,28 +17,34 @@ export default function About() {
         Our mission is to help users save money while discovering amazing promotions from trusted sellers.
       </p>
 
+     {/* Contact form for users to send messages */}
       <form className="about-form">
   <h2>Contact Us</h2>
+  {/* User's name input */}
 
   <label>
     Name:
     <input type="text" name="name" placeholder="Your Name" required />
   </label>
 
-  <label>
+    {/* User's email input */}
+    <label>
     Email:
     <input type="email" name="email" placeholder="you@example.com" required />
   </label>
 
+{/* User's message input */}
   <label>
     Message:
     <textarea name="message" placeholder="Your message..." rows="4" required></textarea>
   </label>
 
   <button type="submit">Send Message</button>
-  <button type="button" onClick={handleBack} className="back-button">Back to Homepage</button>
+  <button type="button" onClick={handleBack} className="back-button"
+  >
+      Back to Homepage
+      </button>
 </form>
-
-    </div>
+</div>
   );
 }
