@@ -5,6 +5,7 @@ export default function Favorites() {
   const userId = localStorage.getItem('userId');
   const [favorites, setFavorites] = useState([]);
 
+// Fetch the user's favorites from the backend when the component mounts
   useEffect(() => {
     if (userId) {
       fetch(`http://localhost:8080/api/favorites/user/${userId}`)
@@ -14,6 +15,7 @@ export default function Favorites() {
     }
   }, [userId]);
 
+// Function to remove a favorite deal by its favoriteId
   const removeFavorite = (favoriteId) => {
     fetch(`http://localhost:8080/api/favorites/${favoriteId}`, {
       method: 'DELETE',
