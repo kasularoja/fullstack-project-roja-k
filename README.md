@@ -38,31 +38,19 @@ Favorites
 - MySQL
 -Rest APIs
 
-#INSTALLATION
-
-
-## Project Structure
-
-```
-/discount-deals/
-├── backend/               # Spring Boot API
-│   ├── src/main/java/com/discountdeals/...
-│   ├── src/main/resources/application.yml
-│   └── pom.xml
-├── frontend/              # React/Vite SPA
-│   ├── src/
-│   ├── public/
-│   └── package.json
-└── README.md
-```
-
-#  Installation & Setup Instructions
-
 # Prerequisites
-- Node.js 
+Node.js
 - Java 21
 - Maven or Gradle
 - MySQL (or use H2 for testing)
+- Git
+
+
+# Project Setup
+This project is structured as a full-stack web application with a Spring Boot backend and a React frontend. Below is a guide to set up and run the application locally.
+
+git clone https://github.com/kasularoja/fullstack-project-roja-k.git
+cd fullstack-project-roja-k
 
 # Backend Setup
 
@@ -84,7 +72,23 @@ npm run dev
 
 Frontend runs at: `http://localhost:5173`
 
-Make sure the API base URL is configured correctly in Axios (usually `http://localhost:8080`).
+
+## Project Structure
+
+```
+/discount-deals/
+├── backend/               # Spring Boot API
+│   ├── src/main/java/com/discountdeals/...
+│   ├── src/main/resources/application.yml
+│   └── pom.xml
+├── frontend/              # React/Vite SPA
+│   ├── src/
+│   ├── public/
+│   └── package.json
+└── README.md
+```
+
+
 
 # API Overview
 
