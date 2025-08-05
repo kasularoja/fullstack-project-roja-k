@@ -327,6 +327,7 @@ textarea:focus {
   color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s;
   box-sizing: border-box;
+
 }
 
 .discount-input::placeholder {
@@ -339,13 +340,5 @@ textarea:focus {
   box-shadow: 0 0 6px var(--accent);
 }
 
-/* Add spacing for discount text in deal card meta */
-
-.meta-discount {
-  font-size: 0.97rem;
-  color: #ffcc99;
-  font-weight: 600;
-  margin-top: 0.15rem;
-}
 
 

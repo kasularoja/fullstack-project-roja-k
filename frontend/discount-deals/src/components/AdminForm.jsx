@@ -53,6 +53,7 @@ export default function AdminForm() {
     }
     // Backend model requires price and discountPrice
     const discountPrice = parseFloat((priceVal * (1 - discountPercentVal / 100)).toFixed(2));
+    // Validate expiry date
     const deal = {
       title,
       description,
@@ -73,6 +74,7 @@ export default function AdminForm() {
         return res.json();
       })
       .then(() => {
+          // Refresh deals after adding
         fetchDeals();
         setTitle('');
         setDescription('');
@@ -94,6 +96,7 @@ export default function AdminForm() {
       .catch((err) => alert('Failed to delete: ' + err));
   };
 
+    // Check if a deal is expired
   const isExpired = (date) => new Date(date) < new Date();
   let filteredDeals = [...deals];
   filteredDeals.sort((a, b) =>
@@ -101,8 +104,9 @@ export default function AdminForm() {
       ? new Date(a.expiryDate) - new Date(b.expiryDate)
       : new Date(b.expiryDate) - new Date(a.expiryDate)
   );
-  if (!showExpired) filteredDeals = filteredDeals.filter((d) => !isExpired(d.expiryDate));
-
+  if (!showExpired) {
+  filteredDeals = filteredDeals.filter((d) => !isExpired(d.expiryDate));
+}
   return (
     <div className="admin-container">
       <h2>Admin Deal Manager</h2>
