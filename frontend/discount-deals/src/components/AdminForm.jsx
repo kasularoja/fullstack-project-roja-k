@@ -13,7 +13,7 @@ export default function AdminForm() {
   const [showExpired, setShowExpired] = useState(true);
   const [sortAsc, setSortAsc] = useState(true);
   const [role, setRole] = useState(null);
-  const [editId, setEditId] = useState(null); // <-- NEW for editing
+  const [editId, setEditId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function AdminForm() {
         })
         .then(() => {
           fetchDeals();
-          setEditId(null); // clear edit mode
+          setEditId(null);
           setTitle('');
           setDescription('');
           setCategory('Electronics');
@@ -108,15 +108,14 @@ export default function AdminForm() {
     }
   };
 
-  // When clicking "Edit", populate fields and mark as editing
+  // When clicking "Edit", populate form and set edit mode
   const handleEdit = (deal) => {
     setEditId(deal.id);
     setTitle(deal.title);
     setDescription(deal.description);
     setCategory(deal.category);
-    setExpiryDate(deal.expiryDate.slice(0, 10)); // form expects yyyy-mm-dd
+    setExpiryDate(deal.expiryDate.slice(0, 10));
     setPrice(deal.price.toString());
-    // discountPercent = calculated from price and discountPrice
     setDiscountPercent(
       deal.price > 0
         ? (((deal.price - deal.discountPrice) / deal.price) * 100).toFixed(1)
@@ -145,7 +144,7 @@ export default function AdminForm() {
       .catch((err) => alert('Failed to delete: ' + err));
   };
 
-  // Check if a deal is expired
+  // Check expiration
   const isExpired = (date) => new Date(date) < new Date();
   let filteredDeals = [...deals];
   filteredDeals.sort((a, b) =>
@@ -259,12 +258,15 @@ export default function AdminForm() {
                         )}d`}
                   </span>
                   <span className="meta-discount">
-                    <b>Discount:</b> {deal.price > 0 ? `${(((deal.price - deal.discountPrice) / deal.price) * 100).toFixed(1)}%` : '-'}
+                    <b>Discount:</b>{' '}
+                    {deal.price > 0
+                      ? `${(((deal.price - deal.discountPrice) / deal.price) * 100).toFixed(1)}%`
+                      : '-'}
                   </span>
                 </div>
               </div>
-              <div>
-                <button className="edit-btn" onClick={() => handleEdit(deal)}>
+              <div className="deal-card-actions">
+                <button className="delete-btn edit-btn" onClick={() => handleEdit(deal)}>
                   Edit
                 </button>
                 <button className="delete-btn" onClick={() => handleDelete(deal.id)}>

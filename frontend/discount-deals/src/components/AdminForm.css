@@ -7,6 +7,7 @@
   --expired-bg: rgba(255, 255, 255, 0.03);
 }
 
+
 body {
   background: linear-gradient(135deg, #231d26 0%, #322114 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -15,6 +16,7 @@ body {
   color: white;
   min-height: 100vh;
 }
+
 
 .admin-container {
   background: var(--frost-bg);
@@ -32,13 +34,15 @@ body {
   align-items: center;
 }
 
+
 .admin-container h2 {
   color: #ffcc99;
   margin-bottom: 2rem;
   font-weight: 700;
   width: 100%;
   text-align: center;
-  }
+}
+
 
 
 /* Form */
@@ -51,6 +55,7 @@ body {
   width: 100%;
   max-width: 600px;
 }
+
 
 .deal-form input,
 .deal-form select,
@@ -68,10 +73,12 @@ body {
   resize: vertical;
 }
 
-.deal-form input:placeholder,
-.deal-form textarea:placeholder {
+
+.deal-form input::placeholder,
+.deal-form textarea::placeholder {
   color: #ddd;
 }
+
 
 .deal-form input:focus,
 .deal-form textarea:focus,
@@ -81,6 +88,7 @@ body {
   box-shadow: 0 0 6px var(--accent);
 }
 
+
 .form-row {
   display: flex;
   gap: 1rem;
@@ -88,6 +96,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
 }
+
 
 /* Buttons */
 button {
@@ -102,6 +111,7 @@ button {
   white-space: nowrap;
 }
 
+
 /* Add deal button */
 .deal-form-button {
   background-color: var(--accent);
@@ -112,10 +122,12 @@ button {
   align-self: center;
 }
 
+
 .deal-form-button:hover {
   background-color: #cc5805;
   transform: scale(1.045);
 }
+
 
 /* Control buttons */
 .deal-list-controls {
@@ -129,6 +141,7 @@ button {
   max-width: 600px;
 }
 
+
 .control-btn {
   background-color: rgba(225, 99, 9, 0.17);
   color: #ffcc99;
@@ -138,11 +151,13 @@ button {
   padding: 0.58rem 1.2rem;
 }
 
+
 .control-btn:hover {
   background-color: var(--accent);
   color: #fff;
   transform: scale(1.05);
 }
+
 
 /* Deal list */
 .deal-list {
@@ -154,6 +169,7 @@ button {
   width: 100%;
   max-width: 940px;
 }
+
 
 .deal-card {
   flex: 1 0 275px;
@@ -180,6 +196,7 @@ button {
   filter: grayscale(0.25);
 }
 
+
 .deal-title {
   font-size: 1.15rem;
   font-weight: bold;
@@ -187,15 +204,18 @@ button {
   margin-bottom: 0.4em;
 }
 
+
 .deal-card.expired .deal-title {
   color: #ffe7ce;
 }
+
 
 .deal-description {
   font-size: 1.01rem;
   color: #fff7ed;
   margin-bottom: 0.8em;
 }
+
 
 .deal-meta {
   font-size: 0.98rem;
@@ -204,6 +224,7 @@ button {
   flex-direction: column;
   gap: 0.12em;
 }
+
 
 .meta-cat {
   background: rgba(225, 99, 9, 0.17);
@@ -216,21 +237,31 @@ button {
   display: inline-block;
 }
 
+
 .deal-countdown {
   font-size: 0.97em;
   color: #ffab79;
   font-weight: 600;
 }
 
+
 .deal-card.expired .deal-countdown {
   color: #ffcba4;
 }
 
-/* Delete button */
-.delete-btn {
+
+/* Buttons container for Edit and Delete, positioned bottom right */
+.deal-card-actions {
+  display: flex;
+  gap: 8px;
   position: absolute;
   right: 15px;
   bottom: 14px;
+}
+
+
+/* Delete and Edit Buttons - styled identically */
+.delete-btn {
   font-size: 0.96em;
   padding: 0.35rem 1.05rem;
   background-color: #cc5805;
@@ -241,12 +272,19 @@ button {
   cursor: pointer;
   transition: background-color 0.18s, transform 0.15s;
   white-space: nowrap;
+  border: none;
 }
 
 .delete-btn:hover {
   background-color: #9e3f04;
   transform: scale(1.05);
 }
+
+/* Edit button inherits .delete-btn styles, no override */
+.edit-btn {
+  /* no styles to override - inherits .delete-btn */
+}
+
 
 /* Empty message */
 .empty-message {
@@ -257,6 +295,7 @@ button {
   padding: 2rem 0 2.5rem 0;
 }
 
+
 /* Responsive */
 @media (max-width: 900px) {
   .admin-container {
@@ -264,10 +303,12 @@ button {
     margin: 1rem;
   }
 
+
   .deal-list {
     justify-content: center;
   }
 }
+
 
 @media (max-width: 570px) {
   .deal-list {
@@ -275,16 +316,19 @@ button {
     align-items: center;
   }
 
+
   .deal-card {
     max-width: 96vw;
     min-width: 92vw;
   }
+
 
   .form-row {
     flex-direction: column;
     align-items: center;
     width: 100%;
   }
+
 
   .deal-form-button,
   .control-btn {
@@ -293,6 +337,7 @@ button {
     text-align: center;
   }
 
+
   .deal-list-controls {
     flex-direction: column;
     gap: 0.8rem;
@@ -300,6 +345,7 @@ button {
     max-width: 600px;
   }
 }
+
 
 /* Inputs, selects, textarea background and focus outline */
 input,
@@ -310,11 +356,13 @@ textarea {
   border-radius: 6px;
 }
 
+
 input:focus,
 select:focus,
 textarea:focus {
   box-shadow: 0 0 6px var(--accent);
 }
+
 
 .discount-input {
   width: 100px;
@@ -327,7 +375,6 @@ textarea:focus {
   color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s;
   box-sizing: border-box;
-
 }
 
 .discount-input::placeholder {
@@ -335,10 +382,7 @@ textarea:focus {
 }
 
 .discount-input:focus {
-  outline: none;
+ outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 6px var(--accent);
 }
-
-
-
