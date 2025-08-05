@@ -18,7 +18,8 @@ export default function DealList() {
       .catch(() => setDeals([]));
   }, []);
 
-  useEffect(() => {
+  // Fetch user favorites (only for logged-in users)
+useEffect(() => {
     setRole(localStorage.getItem('role'));
     if (userId && (role === 'user' || role === 'admin')) {
       fetch(`http://localhost:8080/api/favorites/user/${userId}`)
@@ -60,7 +61,7 @@ export default function DealList() {
     );
   }
 
-  return (
+return (
     <div className="deal-list-container">
       <h1>Available Deals</h1>
       {role === 'admin' && (
