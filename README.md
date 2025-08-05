@@ -6,7 +6,7 @@ A full-stack web application that allows users to browse, search, and save the b
 
  User Roles
 - Guest: Can view all public deals.
-- User: Can save favorite deals and manage their own favorites.
+- Users: Can save favorite deals and manage their own favorites.
 - Admin: Can post, update, and delete any deal.
 
 Deal Management
@@ -54,13 +54,13 @@ Favorites
 └── README.md
 ```
 
-##  Installation & Setup Instructions
+#  Installation & Setup Instructions
 
 # Prerequisites
-- Node.js ≥ 18
-- Java ≥ 17
+- Node.js 
+- Java 21
 - Maven or Gradle
-- PostgreSQL (or use H2 for testing)
+- MySQL (or use H2 for testing)
 
 # Backend Setup
 
