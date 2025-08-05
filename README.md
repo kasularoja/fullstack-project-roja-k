@@ -109,12 +109,17 @@ Make sure the API base URL is configured correctly in Axios (usually `http://loc
 - Pagination & infinite scroll
 - Social login integration
 - User profile management
-
+# Testing
+- Unit tests for backend using JUnit
+- Integration tests for API endpoints
+- Frontend testing with React Testing Library
+- Backend testing with Postman 
 # Resources
 
 - [Spring Boot Docs](https://spring.io/projects/spring-boot)
 - [React Docs](https://reactjs.org/)
-- [PostgreSQL](https://www.postgresql.org/)
+- [Vite Docs](https://vitejs.dev/)
+
 
 # Author
 
