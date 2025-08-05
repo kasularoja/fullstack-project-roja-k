@@ -39,7 +39,7 @@ Favorites
 - MySQL
 -Rest APIs
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 /discount-deals/
@@ -54,15 +54,15 @@ Favorites
 └── README.md
 ```
 
-##  Getting Started
+##  Installation & Setup Instructions
 
-### Prerequisites
+# Prerequisites
 - Node.js ≥ 18
 - Java ≥ 17
 - Maven or Gradle
 - PostgreSQL (or use H2 for testing)
 
-### 🔧 Backend Setup
+# Backend Setup
 
 ```bash
 cd backend
@@ -70,7 +70,7 @@ cd backend
 ./mvnw spring-boot:run
 ```
 
-**Application runs at**: `http://localhost:8080`
+Application runs at: `http://localhost:8080`
 
 #Frontend Setup
 
@@ -80,31 +80,35 @@ npm install
 npm run dev
 ```
 
-**Frontend runs at**: `http://localhost:5173`
+Frontend runs at: `http://localhost:5173`
 
 Make sure the API base URL is configured correctly in Axios (usually `http://localhost:8080`).
 
-## API Overview
+# API Overview
 
-| Endpoint               | Method | Description                  |
-|------------------------|--------|------------------------------|
-| `/api/deals`           | GET    | Fetch all deals              |
-| `/api/deals/{id}`      | GET    | Fetch single deal            |
-| `/api/deals`           | POST   | Create new deal (Admin only) |
-| `/api/deals/{id}`      | DELETE | Delete deal (Admin only)     |
-| `/api/deals/search`    | GET    | Search deals by keyword      |
+| Endpoint                             | Method | Description                   |
+|--------------------------------------|--------|-------------------------------|
+| `/api/deals`                         | GET    | Fetch all deals               |
+| `/api/deals/{id}`                    | GET    | Fetch single deal             |
+| `/api/deals`                         | POST   | Create new deal (Admin only)  |
+| `/api/deals/{id}`                    | DELETE | Delete deal (Admin only)      |
+| `/api/deals/{id}`                    | PUT    | Update deal (Admin only)      |
+| `/api/users/{id}/favorites`          | GET    | Get user favorites            |
+| `/api/users/{id}/favorites`          | POST   | Add to favorites              |
+| `/api/users/{id}/favorites/{dealId}` | DELETE | Remove from favorites |
 
-## Authentication (Optional Enhancement)
+
+
+# Authentication (Optional Enhancement)
 - Role stored in localStorage or managed via Spring Security
 - Future enhancement: JWT auth and protected routes
 
-##  Future Enhancements
+# Future Enhancements
 - Deal rating system
 - Notifications for expiring deals
 - Pagination & infinite scroll
 - Social login integration
-
-
+- User profile management
 
 # Resources
 
