@@ -8,6 +8,8 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
+
+    // Primary key for the User table
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,6 +46,7 @@ public class User {
     }
 
     public void setUsername(String username) {
+
         this.username = username;
     }
 
