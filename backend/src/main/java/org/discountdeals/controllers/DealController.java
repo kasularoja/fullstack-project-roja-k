@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/deals")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*") // Allow cross-origin requests from any domain (useful for frontend integration)
 public class DealController {
 
     @Autowired
@@ -26,15 +26,16 @@ public class DealController {
         return ResponseEntity.ok(deals);
     }
 
-    // Create new deal
+
     @PostMapping
     public ResponseEntity<Deal> createDeal(@RequestBody Deal deal) {
         deal.setVersion(null);
         Deal savedDeal = dealRepository.save(deal);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedDeal);
     }
+    // Get deals by ID
 
-    // Update existing deal (optimistic locking)
+
     @PutMapping("/{id}")
     public ResponseEntity<?> updateDeal(@PathVariable Long id, @RequestBody Deal updatedDeal) {
         try {
