@@ -1,49 +1,120 @@
+.deal-list-container {
+  max-width: 950px;
+  margin: 38px auto;
+  padding: 2rem;
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px;
+  box-shadow: 0 0 24px rgba(255,255,255,0.10);
+  color: #cc5805;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  backdrop-filter: blur(3px);
+}
+
+.deal-list-container h1 {
+  text-align: center;
+  color: #ffcc99;
+  font-weight: bold;
+  margin-bottom: 2.2rem;
+}
+
+.admin-controls {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+  margin-bottom: 1.2rem;
+}
+
+.admin-controls label {
+  color: #ffcc99;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Expired deal row style */
+.expired-deal-row {
+  opacity: 0.63;
+  background-color: rgba(255, 0, 0, 0.09);
+}
+.expired-text {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* Table Styles */
 .deal-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
-  background-color: rgba(255, 255, 255, 0.08); /* semi-transparent background */
-  backdrop-filter: blur(6px); /* match with other containers */
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
   border-radius: 8px;
   overflow: hidden;
-  color: #cc5805;; /* default font color for contrast */
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+  color: #cc5805;
+  box-shadow: 0 0 12px rgba(255,255,255,0.09);
 }
 
 .deal-table th,
 .deal-table td {
   padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
 .deal-table th {
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(255,255,255,0.12);
   color: #ffcc99;
   font-weight: bold;
 }
 
 .deal-table td {
-  color: #cc5805;;
+  color: #fff;
 }
 
-.deal-table td button {
-  padding: 0.4rem 0.8rem;
+/* Favorite (Save/Saved) Button Styles */
+.favorite-btn,
+.favorite-btn.added {
   background-color: #e16309;
+  color: #fff !important; /* fix for contrast */
   border: none;
-  color: #cc5805;;
-  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  border-radius: 5px;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s;
+  transition: background-color 0.25s, transform 0.2s;
+  font-size: 1em;
 }
 
-.deal-table td button:disabled {
-  background-color: #cc5805;;
+.favorite-btn:hover:not(:disabled) {
+  background-color: #cc5805;
+  transform: scale(1.05);
+}
+
+.favorite-btn:disabled {
+  background-color: #888;
   cursor: not-allowed;
 }
 
-.deal-table td button:hover:not(:disabled) {
-  background-color: #cc5805;
-  transform: scale(1.05);
+.favorite-btn.added {
+  background-color: #4caf50;
+  color: #fff !important; /* ensure text is white on green */
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Remove table button color for other custom buttons, keep default for favorite-btn */
+.deal-table td button:not(.favorite-btn) {
+  color: #cc5805;
+  background-color: #ffe7ce;
+  border-radius: 4px;
+}
+
+/* Responsive styles */
+@media (max-width: 650px) {
+  .deal-list-container {
+    padding: 1rem 0.5rem;
+  }
+  .deal-table th,
+  .deal-table td {
+    padding: 0.6rem 0.32rem;
+    font-size: 0.97em;
+  }
 }

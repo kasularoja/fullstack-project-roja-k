@@ -62,9 +62,7 @@ function App() {
               role === 'user' || role === 'admin' ? (
                 <Favorites />
               ) : (
-                <h3 style={{ padding: '2rem', color: 'crimson' }}>
-                  Access denied. Please <Link to="/login">log in</Link> to view your favorites.
-                </h3>
+                <Favorites />
               )
             }
           />
